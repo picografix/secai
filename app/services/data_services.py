@@ -8,15 +8,24 @@ from services.cache_services import cached
 from services.llm.get_header import QA
 from fastapi import HTTPException
 import pandas
+import random
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Initialize QA service
 fin_qa = QA()
-
+def generate_random_id_email():
+    """
+    Generate a random ID and email for Edgar API.
+    """
+    username = f"secai_{random.randint(1000, 9999)}"
+    email = f"{username}@secai.com"
+    return f'{username} {email}'
 # Set identity for Edgar API
-set_identity('secai secai@secai.com')
+set_identity(generate_random_id_email())
+
+
 
 @cached
 async def get_report(ticker: str, year: str, force_reload: bool = False) -> Dict[str, Any]:
