@@ -4,6 +4,11 @@ from dataclasses import dataclass, field
 from lightrag.core import Component, Generator, DataClass
 from lightrag.components.model_client import GroqAPIClient
 from lightrag.components.output_parsers import JsonOutputParser
+from lightrag.utils.logger import get_logger
+
+
+
+
 
 @dataclass
 class QAOutput(DataClass):
